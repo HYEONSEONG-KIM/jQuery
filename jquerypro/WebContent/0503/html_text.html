@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel = "stylesheet" href = "../css/outstyle.css">
+<script src = "../js/jquery-3.6.0.min.js" type = "text/javascript"></script>
+<script type="text/javascript">
+	
+	$(document).ready(function(){
+		$('input[value=html]').on('click',function(){
+			
+			res = "";
+			// 첫번째 p를 대상으로 태그를 포함한 문자를 가져옴
+			//res += $('p').html();
+			
+			
+			// 반복문을 이용하여 전체 p를 대상으로 가져오기
+			// i는 index v는 value
+			$.each($('p'), function(i,v){
+				//res += $(this).html() + "\n";
+				//res += $(v).html() + "\n";
+				res += $('p').eq(i).html() + "\n";
+			
+			})			
+			
+			alert(res);
+		})
+		
+		$('input[value = text]').on('click',function(){
+			
+			res = "";
+			// 모든 p를 대상으로 문자만 가져오기
+			res += $('p').text();
+			alert(res);
+			
+		})
+		
+	})
+
+</script>
+</head>
+<body>
+
+	<div class = "box">
+		<h3>
+		대상요소의 내용가져오기<br>
+		$('p').html() : 태그포함하여 내용 가져오기 => 해당 태그의 첫번째 요소를 대상<br>
+		-> $.each(대상,function(i,v){ }) ===> i는 index, v는 value(생략가능)<br>
+		-> 반복문 안에서 대상을 $(this)로 받음<br><br>
+		$('p').text() : 태그포함하지 않고 내용만 가져오기 => 해당 태그의 모든 요소를 대상<br>
+		</h3>
+		<p>1<span>홍길동</span></p>
+	    <p>2<span>개나리</span></p>
+	    <p>3<span>진달래</span></p> 
+	</div>
+	<input type = "button" value = "html">
+	<input type = "button" value = "text">
+	
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

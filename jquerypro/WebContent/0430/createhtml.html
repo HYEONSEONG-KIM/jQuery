@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel = "stylesheet" href = "../css/outstyle.css">
+<script src = "../js/jquery-3.6.0.min.js" type = "text/javascript"></script>
+<script type="text/javascript">
+	
+	$(document).ready(function(){
+		$('#box1 input').on('click', function(){
+			new_ptag = $('<p title = "Hello jQuery" onclick = "proc1(this)">Hello jQuery</p>')
+			new_ptag.appendTo($('#result1'));
+		})
+		
+		$('#box2 input').on('click', function(){
+			new_ptag2 = $('<p></p>'
+					,{
+				'title' : 'hello',
+				'text' : 'Hello jQuery!!',
+				'click' : function(){
+					$(this).css('font-size', '1.5em').css('color', 'red');
+				}
+			});
+			new_ptag2.appendTo($('#result2'));
+		})
+	
+	})
+
+	function proc1(t){
+		
+		//$(t).css('font-size', '1.5em').css('color', 'red');
+		$(t).remove();
+	}
+</script>
+</head>
+<body>
+	
+	<div class = "box" id = "box1">
+	<h3>새로운 요소 생성하기</h3>
+	<p>
+	a = $('html코드')<br>
+	a.appendTo(접근할 요소)
+	</p>
+		<input type = "button" >
+		<div id = "result1"></div>
+	</div>
+	
+	<div class = "box" id = "box2">
+	<h3>새로운 요소 생성하기</h3>
+	<p>
+	a = $('&lt;태그명>&lt;/태그명>', {properties})<br>
+	properties 에는 속성('키' : 'value',...)또는 이벤트를 설정
+	</p>
+		<input type = "button" >
+		<div id = "result2"></div>
+	</div>
+	
+		
+</body>
+</html>

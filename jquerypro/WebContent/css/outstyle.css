@@ -1,0 +1,73 @@
+pre{
+	background : lightblue;
+	font-size : 2.0em;
+}
+
+div{
+	border : 1px solid blue;
+	width : 500px;
+	height: auto;
+	margin : 20px;
+	padding : 20px;
+}
+input[type=button] ,button, button[type=button], input[type=submit], input[type=reset]{
+	
+	width : auto;
+	height: 30px;
+	padding : 5px 10px;
+	background: #fcfcfc;
+	border-radius : 10px;
+	
+}
+
+.box{
+	background-image: linear-gradient(lightblue, white);
+	border : 1px solid blue;
+	width : 100%;
+	height : auto;
+	margin : 20px;
+	padding : 20px;
+	
+}
+
+.box div{
+	
+	border : 1px dotted orange;
+	height: auto;
+	width : 350px;	
+	margin : 20px;
+	padding : 20px;
+	
+}
+
+.box .dd{
+	width : 19%;
+	height : auto;
+	border : 1px dotted green;
+	margin : 5px;
+	padding : 5px;	
+	float : left;
+}
+
+
+.par{
+	width : 95%;
+	display : flex;
+	flex-direction : row;	
+	margin : 30px;
+}
+
+.par .dd{
+
+	height : auto;
+	border : 1px dotted green;
+	margin : 5px;
+	padding : 5px;	
+	
+}	
+
+
+
+
+
+

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel = "stylesheet" href = "../css/outstyle.css">
+<script src = "../js/jquery-3.6.0.min.js" type = "text/javascript"></script>
+<style type="text/css">
+	form{
+		border : 1px dotted blue;
+		padding : 20px;
+		margin : 10px;
+	}
+</style>
+<script>
+
+	$(function(){
+		//document.getElementsByTagName('p')
+		$('p').css('background', 'pink');	
+		$('p',document.forms[2]).css('background', 'red');
+		
+		
+		
+		$('form').on('click',function(){
+			
+			r = parseInt(Math.random() * 256);
+			g = parseInt(Math.random() * 256);
+			b = parseInt(Math.random() * 256);
+			col = `rgb(${r},${g},${b})`;
+			
+			a = $('p',this).length;
+			
+			ran = parseInt(Math.random() *a);
+			
+			console.log(ran);
+			
+			$('p', this).eq(ran).css('background', col);
+		
+			
+		});
+	})
+	
+
+</script>
+</head>
+<body>
+<pre>
+eq : 요소 접근
+$('선택자',context)
+context : 선택자를 검색할 범위를 설정
+context 생략시 문서 전체에서 선택자를 검색
+
+전체 p를 선택
+$('p').css('background', 'pink');
+
+인덱스 n번째에 해당하는 form 안에서 p태크를 선택
+$('p',document.forms[n]).css('background', 'red');
+
+form을 클릭하면 클릭한 form안에 p를 선택
+$('form').on.('click',function(){});
+</pre>
+	<form>
+		<p>무궁화 꽃이 피었습니다</p>
+		<p>바람이 살랑살랑 불어옵니다</p>
+	</form>
+<p>흰눈이 보슬보슬 내려 옵니다</p>
+	<form>
+		<p>무궁화 꽃이 피었습니다</p>
+		<p>바람이 살랑살랑 불어옵니다</p>
+	</form>
+	
+	<form>
+		<p>무궁화 꽃이 피었습니다</p>
+		<p>바람이 살랑살랑 불어옵니다</p>
+	</form>
+</body>
+</html>

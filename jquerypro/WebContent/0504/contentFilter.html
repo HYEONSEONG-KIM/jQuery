@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel = "stylesheet" href = "../css/outstyle.css">
+<script src = "../js/jquery-3.6.0.min.js" type = "text/javascript"></script>
+<script type="text/javascript">
+
+	$(function(){
+		//jQuery가 포함된 span태그 의 테두리 파랑 : 
+			$('span:contains("jQuery")').css('border', '2px solid blue');
+		//jQuery가 포함되지 않은 span 태그 의 테두리 빨강  : 
+			//$('span').not('span:contains("jQuery")').css('border', '2px solid red');
+			$('span:not(:contains(jQuery))').css('border', '2px solid red');	
+		//span을 갖는 div요소 태그 의 테두리   그린 
+			$('div:has(span)').css('border','1px solid green');
+		//아무것도 없는 빈 div 태그 의 테두리      
+			$('div:empty').css('border','1px solid yellow');
+		//div 후손 span 태그 의 글자색  빨강, 크기,굵게
+			$('#box1 div span').css({'color':'red', 'font-size' : '2.0em', 'font-weigth' : 'bold'});
+	})
+
+</script>
+</head>
+<body>
+	<div class = "box" id = "box1">
+		
+		<h3>
+		:contains(text) -> 지정한 텍스트를 포함하는 요소<br>
+		:has(selector) ->  대상요소 중 자식요소도 없고 텍스트도 없는 요소<br>
+		:empty -> 대상요소 중 자식요소도 없고 텍스트도 없는 요소<br>
+		:parent -> 대상요소 중 자식요소를 갖거나 텍스트를 갖고 있는 요소와 일치<br><br><br>
+		
+		//jQuery가 포함된 span태그 의 테두리 파랑 : <br>
+			$('span:contains("jQuery")').css('border', '2px solid blue');<br><br>
+		//jQuery가 포함되지 않은 span 태그 의 테두리 빨강  : <br>
+			$('span').not('span:contains("jQuery")').css('border', '2px solid red');<br>
+			$('span:not(:contains(jQuery))').css('border', '2px solid red');	<br><br>
+		//span을 갖는 div요소 태그 의 테두리   그린 <br>
+			$('div:has(span)').css('border','1px solid green');<br><br>
+		//아무것도 없는 빈 div 태그 의 테두리      <br>
+			$('div:empty').css('border','1px solid yellow');<br><br>
+		//div 후손 span 태그 의 글자색  빨강, 크기,굵게<br>
+			$('#box1 div span').css({'color':'red', 'font-size' : '2.0em', 'font-weigth' : 'bold'});<br><br>
+		</h3>
+	
+		<div></div>
+		
+		<div>헬로우~~
+      		<span>오늘도  즐겁게~열심히!</span>
+		</div>
+		
+		<p>Hello jQuery! <span>Thanks, jQuery!</span></p>
+		
+		<div class="myClass">jQuery!</div>
+		
+		<span class="notMyClass">쉬운 jQuery~~!</span>
+		
+		<div></div>
+		
+		<br><br>
+		
+		<hr color="blue"><br>
+	
+	</div>
+</body>
+</html>
