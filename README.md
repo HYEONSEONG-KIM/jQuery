@@ -1,2 +1,2 @@
 # jQuery
-## (Summary)[https://hyeonseong-kim.github.io/jQuery/jquerypro/WebContent/index.html]
+- (Summary)[https://hyeonseong-kim.github.io/jQuery/jquerypro/WebContent/index.html]
