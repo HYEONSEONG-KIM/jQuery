@@ -9,9 +9,16 @@
 <script type="text/javascript">
 
 	$(function(){
+		
 		$('#spring').on('change',function(){
+			res = "";
+			//$('#spring option:selected')
+			//$.each($('option:selected', this).each(function(){}))
+			$('option:selected', this).each(function(i){
+				res += $(this).val() + "<br>";
+			})
 			
-			$('option:selected')
+			$('#box1 #result').html(res);
 		})
 	})
 
@@ -29,16 +36,16 @@
 		
 		<form>
 			봄소식 : <select name="spring" id="spring" multiple size="6">
-				<option>개나리</option>
-				<option selected>진달래</option>
-				<option>민들레</option>
-				<option selected>벚꽃</option>
-				<option>목련</option>
-				<option>철쭉</option>
+				<option value = "개나리">개나리</option>
+				<option value = "진달래" selected>진달래</option>
+				<option value = "민들레">민들레</option>
+				<option value = "벚꽃" selected>벚꽃</option>
+				<option value = "목련">목련</option>
+				<option value = "철쭉">철쭉</option>
 			</select>
 		</form>
 		
-		
+		<div id = "result"></div>
 	</div>
 
 </body>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel = "stylesheet" href = "../css/outstyle.css">
+<script src = "../js/jquery-3.6.0.min.js" type = "text/javascript"></script>
+
+<script type="text/javascript">
+	
+	$(function(){
+		$('#hidden').on('click', function(){
+			res = "";
+			$('#box1 p:hidden').each(function(){
+				res += $(this).text() + "<br>";
+			})
+			$('#result1').html(res);
+		})
+		
+		$('#visible').on('click', function(){
+			res = "";
+			$('#box1 p:visible').each(function(){
+				res += $(this).text() + "<br>";
+			})
+			$('#result2').html(res);
+		})
+		
+		
+		$("#box2 input[value=hidden]").on('click', function(){
+			res = "";
+			// 조건문을 주는 이유 : input의 경우 입출력 메서드가 val()이고  나머지(br태그 제외)는
+			// text 혹은 html이므로
+			// => form태그 전체의 태그에서 값 가져오기위해 반복문
+			$('#testForm *:hidden').each(function(){
+				if(this.tagName == 'INPUT'){
+					res += $(this).val() + "<br>";
+				}else if(this.tagName != 'BR'){
+					res += $(this).text() + "<br>";
+				}
+				
+			})
+			$("#result3").html(res);
+		})
+		
+		$("#box2 input[value=visible]").on('click', function(){
+			res = "";
+			$('#testForm *:visible').each(function(){
+				if(this.tagName == 'INPUT'){
+					name = $(this).attr('name');
+					type = $(this).attr('type');
+					
+					if(type == 'radio'){
+						// 선택여부의 속성값을 가져옴 -> prop()=>참, 거짓
+						if($(this).prop('checked')){
+							val = $(this).val();
+							res += `input ${type} ${name} : ${val} <br>`
+						}
+					}else{
+						val = $(this).val();
+						
+						res += `input ${type} ${name} : ${val} <br>`
+					}
+					
+					
+				}else if(this.tagName != "<BR>"){
+					res += $(this).text() + "<br>";
+				}
+			})
+			$("#result4").html(res);
+		})
+		
+	})
+	
+
+</script>
+
+</head>
+<body>
+	<div class = "box" id = "box1">
+		<h3>
+		:hidden <br>
+		1. display : none <br>
+		2. type=hidden<br>
+		3. width=0 height=0<br>
+		4. 부모요소가 hidden <br>
+		=> 화면에 영역을 차지하지 않음
+		<br><br>
+		:visible <br>
+		1. display :none 이 아닌 것<br>
+		2. type =hidden 이 아닌 것 <br>
+		3. width=0 height=0 이 아닌 것 <br>
+		4. 부모요소가 hidden 이 아닌 것 <br>
+		5. Visibility =hidden opacity=0 인 것<br>
+		=> 화면에 보이지는 않지만 영역은 차지하고 있음<br>
+		</h3>
+		
+		<p> 보이는 문단</p>
+		<p style="visibility:hidden;">숨겨진 문단</p>
+		<p style="display:none;"> 자리를 차지 하지 못한 문단 </p>
+		<p style="opacity:0;"> 투명한 문단</p>
+		<br>
+		<input id = "hidden" type = "button" value = "hidden">
+		<input id = "visible" type = "button" value = "visible">
+		
+		<div id= "result1"></div>
+		<div id= "result2"></div>
+		
+	</div>
+	
+	<div class = "box" id = "box2">
+		<h3>
+		반복문 안에서 현재 실행중인 태그이름을 비교<br>
+		if(this.tagName !== 'INPUT') -> 대문자로 비교<br>
+		<br><br>
+		- 조건이 hidden일때 script<br>
+		$("#box2 input[value=hidden]").on('click', function(){<br>
+			res = "";<br>
+			// 조건문을 주는 이유 : input의 경우 입출력 메서드가 val()이고  나머지(br태그 제외)는<br>
+			// text 혹은 html이므로<br>
+			// => form태그 전체의 태그에서 값 가져오기위해 반복문<br>
+			$('#testForm *:hidden').each(function(){<br>
+				if(this.tagName == 'INPUT'){<br>
+					res += $(this).val() + "&lt;br>";<br>
+				}else if(this.tagName != 'BR'){<br>
+					res += $(this).text() + "&lt;br>";<br>
+				}<br>
+				
+			})<br>
+			$("#result3").html(res);<br>
+		})		
+		</h3>
+		
+		<form id="testForm"> 
+			<input type="hidden" name="userAge" value="33">
+			
+			<input type="hidden" name="userCity" value="대전">
+			
+			I D : <input type="text" name="userID" value="hong">  
+			<span style="display:none">ID가 중복됩니다. </span> <br>  
+			
+			이름 : <input type="text" name="userName" value="홍길동">   
+			<span style="visibility:hidden">이름을 입력하세요</span><br>  
+			
+			성별 : <input type="radio" name="sung" value="남" checked>남자  
+			<input type="radio" name="sung" value="여" >여자  
+		</form>
+		
+		<input type = "button" value = "hidden">
+		<input type = "button" value = "visible">
+		
+		<div id = "result3"></div>
+		<div id = "result4"></div>
+	</div>
+
+</body>
+</html>
+
+
