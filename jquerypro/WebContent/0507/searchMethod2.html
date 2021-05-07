@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel = "stylesheet" href = "../css/outstyle.css">
+<style type="text/css">
+.siblings * { 
+	  display: block;
+	  border: 2px solid lightgrey;
+	  color: lightgrey;
+	  padding: 5px;
+	  margin: 15px;
+	}
+</style>
+<script src = "../js/jquery-3.6.0.min.js" type = "text/javascript"></script>
+
+<script type="text/javascript">
+	
+	$(function(){
+		
+		$('#parent').on('click',function(){
+			$('#box1 span').parent().css({"color": "red", "border": "2px solid red"});
+		})
+		
+		
+		$('#parents').on('click',function(){
+			$('#box1 span').parents().css({"color": "green", "border": "2px solid green"});
+		})
+	
+		
+		$('#parents_sel').on('click',function(){
+			$('#box1 span').parents('#box1 .siblings').css({"color": "blue", "border": "2px solid blue"});
+		})
+	
+		$('#find').on('click', function(){
+			$('#box2').find($('span')).css({"color": "orange", "border": "2px solid orange"});
+		})
+		
+		$('.but').on('click',function(){
+			$(this).parents('ul').find($('span')).css({"color": "black", "border": "2px solid black"});
+		})
+	})
+</script>
+
+</head>
+<body>
+	<div class = "box" id = "box1">
+		<h3>
+		parent(),parents(),parents(selector), parentsUntil(selector) : 선택요소의 부모요소<br>
+		siblings() ,siblings(selector) : 선택요소의 앞뒤 모든 요소들<br><br>
+		$('#box1 span').parent().css({"color": "red", "border": "2px solid red"});<br>
+		$('#box1 span').parents().css({"color": "green", "border": "2px solid green"});<br>
+		$('#box1 span').parents('#box1 .siblings').css({"color": "blue", "border": "2px solid blue"});<br>
+		</h3>
+		
+		  <div class = "siblings" style="width:500px;">div (great-grandparent)
+   		 	<ul>ul (grandparent)  
+	      		<li>li (direct parent)
+	       		 <span>span</span>
+	      		</li>
+    		</ul>   
+  		</div>
+  		
+  		<input id = "parent" type = "button" value = "parent">
+		<input id = "parents" type = "button" value = "parents">
+		<input id = parents_sel type = "button" value = "parents_sel">
+	</div>
+	
+	
+	<div class = "box" id = "box2">
+		<h3>
+		find() : 선택요소의 후손요소들<br><br>
+		$('#box2').find($('span')).css({"color": "orange", "border": "2px solid orange"});<br>
+		$(this).parents('ul').find($('span')).css({"color": "black", "border": "2px solid black"});<br>
+		</h3>
+		
+		  <div class = "siblings" style="width:500px;">div (great-grandparent)
+   		 	<ul>ul (grandparent)  
+	      		<li>li (direct parent)
+	       		 <span>span<input class = "but" type = "button" value = "find"></span>
+	      		</li>
+    		</ul>   
+    		
+    		<ul>ul (grandparent)  
+	      		<li>li (direct parent)
+	       		 <span>span<input class = "but" type = "button" value = "find"></span>
+	      		</li>
+    		</ul> 
+    		
+    		<ul>ul (grandparent)  
+	      		<li>li (direct parent)
+	       		 <span>span<input class = "but" type = "button" value = "find"></span>
+	      		</li>
+    		</ul> 
+  		</div>
+  		
+  		<input id = "find" type = "button" value = "find">
+	
+	</div>
+
+</body>
+</html>
+
+

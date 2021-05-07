@@ -23,7 +23,7 @@ input[type=button] ,button, button[type=button], input[type=submit], input[type=
 .box{
 	background-image: linear-gradient(lightblue, white);
 	border : 1px solid blue;
-	width : 100%;
+	width : 95%;
 	height : auto;
 	margin : 20px;
 	padding : 20px;
@@ -34,14 +34,14 @@ input[type=button] ,button, button[type=button], input[type=submit], input[type=
 	
 	border : 1px dotted orange;
 	height: auto;
-	width : 350px;	
+	width : 80%;	
 	margin : 20px;
 	padding : 20px;
 	
 }
 
 .box .dd{
-	width : 19%;
+	width : 80%;;
 	height : auto;
 	border : 1px dotted green;
 	margin : 5px;
@@ -50,21 +50,7 @@ input[type=button] ,button, button[type=button], input[type=submit], input[type=
 }
 
 
-.par{
-	width : 95%;
-	display : flex;
-	flex-direction : row;	
-	margin : 30px;
-}
 
-.par .dd{
-
-	height : auto;
-	border : 1px dotted green;
-	margin : 5px;
-	padding : 5px;	
-	
-}	
 
 
 
