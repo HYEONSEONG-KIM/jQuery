@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel = "stylesheet" href = "../css/outstyle.css">
+<style>
+	.siblings * { 
+	  display: block;
+	  border: 2px solid lightgrey;
+	  color: lightgrey;
+	  padding: 5px;
+	  margin: 15px;
+	}
+	
+	.start{
+		color : black;
+	}
+</style>
+<script src = "../js/jquery-3.6.0.min.js" type = "text/javascript"></script>
+
+<script type="text/javascript">
+
+	$(function(){
+		
+		$('#next').on('click',function(){
+		 	$("#box1 li.start").next().css({"color": "red", "border": "2px solid red"});
+			
+		})
+		
+		
+		$('#nextAll').on('click',function(){
+			$('#box1 li.start').nextAll().css({"color": "blue", "border": "2px solid blue"});
+		})
+
+		
+		$('#nextUntil').on('click',function(){
+			$('#box1 li.start').nextUntil($('#box1 li:last')).css({"color": "green", "border": "2px solid green"});
+		})
+		
+		$('#preview').on('click',function(){
+			$('#box2 li.start').prev().css({"color": "red", "border": "2px solid red"});
+			
+		})
+		
+		$('#previewAll').on('click',function(){
+			$('#box2 li.start').prevAll().css({"color": "blue", "border": "2px solid blue"});
+		})
+		
+		$('#previewUntil').on('click',function(){
+			$('#box2 li.start').prevUntil($('#box2 li:eq[0]')).css({"color": "green", "border": "2px solid green"});
+		})
+	})
+	
+
+</script>
+
+</head>
+<body>
+	<div class = "box" id = "box1">
+		<h3>
+		add() : 선택확장<br>
+		next(),nextAll(),nextUntil(selector) : 선택요소의 다음 형제요소들<br>
+		prev(),preveAll(),prevUntil(selector) : 선택요소의 이전 형제요소들<br>
+		
+		
+		</h3>
+		
+		<div style="width:500px;" class="siblings">
+		  <ul>ul (parent)  
+		    <li>li (sibling)</li>
+		    <li>li (sibling)</li>
+		    <li class="start">li (sibling with class name "start")</li>
+		    <li>li (the next sibling of li with class name "start")</li>
+		    <li>li (sibling)</li>
+		    <li>li (sibling)</li>
+		    <li>li (sibling)</li>
+		  </ul>   
+		</div>
+		
+		<input id = "next" type = "button" value = "next">
+		<input id = "nextAll" type = "button" value = "nextAll">
+		<input id = "nextUntil" type = "button" value = "nextUntil">
+		
+	</div>
+	
+	
+	<div class = "box" id = "box2">
+		<h3>
+		add() : 선택확장<br>
+		next(),nextAll(),nextUntil(selector) : 선택요소의 다음 형제요소들<br>
+		prev(),preveAll(),prevUntil(selector) : 선택요소의 이전 형제요소들<br>
+		parent(),pratents(),parents(selector), parentsUntil(selector) : 선택요소의 부모요소<br>
+		siblings() ,siblings(selector) : 선택요소의 앞뒤 모든 요소들<br>
+		find() : 선택요소의 후손요소들<br>
+		
+		</h3>
+		
+		<div style="width:500px;" class="siblings">
+		  <ul>ul (parent)  
+		    <li>li (sibling)</li>
+		    <li>li (sibling)</li>
+		    <li>li (sibling)</li>
+		    <li>li (sibling)</li>
+		    <li class="start">li (sibling with class name "start")</li>
+		    <li>li (the next sibling of li with class name "start")</li>
+		    <li>li (sibling)</li>
+		    <li>li (sibling)</li>
+		    <li>li (sibling)</li>
+		  </ul>   
+		</div>
+		
+		<input id = "preview" type = "button" value = "preview">
+		<input id = "previewAll" type = "button" value = "previewAll">
+		<input id = "previewUntil" type = "button" value = "previewUntil">
+		
+	</div>
+
+</body>
+</html>
+
+
