@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel = "stylesheet" href = "../css/outstyle.css">
+<script src = "../js/jquery-3.6.0.min.js" type = "text/javascript"></script>
+
+<script type="text/javascript">
+
+	$(function(){
+		
+		$('#runBtn').on('click', function(){
+			
+			res = "";
+			// 각 요소의 상태값 가져오기
+			res += "체크박스  checked : " + $('#checkTest').prop('checked') + "<br>";
+			res += "select  option:eq(2) : " + $('#selTest option:eq(2)').prop('selected')+ "<br>";
+			res += "text readonly : " + $('#txtTest').prop('readonly') + "<br>";
+			
+			$('#result').html(res);
+		})
+		
+		$('#changeBtn').on('click', function(){
+			// 현재 상태값을 반대상태로 변경
+			chk = $('#checkTest').prop('checked')
+			sel = $('#selTest option:eq(2)').prop('selected')
+			txt = $('#txtTest').prop('readonly')
+			
+			$('#checkTest').prop('checked', !chk)
+			$('#selTest option:eq(2)').prop('selected', !sel)
+			$('#txtTest').prop('readonly', !txt)
+		})
+		
+		/* $('#check').on('change', function(){
+			flag = $(this).prop('checked');
+		
+			$('.check').prop('checked',flag);
+		}) */
+		
+		$('.checkAll').on('change',function(){
+			flag = $(this).prop('checked');
+			
+			//$(this).parent().find('.check').prop('checked',flag);
+			$(this).nextAll().prop('checked',flag);
+		})
+		
+	})
+
+</script>
+
+</head>
+<body>
+	<div class = "box" id = "box1">
+		<h3>
+		prop('속성명') : 상태값 가져오기 - true/false 리턴<br>
+		prop('속성명', 'boolean') - true/false 설정<br>
+		</h3>
+		<form>
+		체크박스(라디오버튼) : <input type="checkbox" id="checkTest"  checked><br><br>
+		리스트박스(select객체) : 
+ 		<select id="selTest">
+     		<option value="1">하나</option> 
+     		<option value="2">둘</option>
+     		<option value="3" selected >셋</option> 
+     		<option value="4">넷</option>
+ 		</select><br><br>
+		text객체	(readonly) : <br>
+		<input type="text" value="가나다" id="txtTest"><br><br>
+
+ 		button객체(disabled) : <br>
+       	<input type="button" value="실행" id="runBtn" >
+       	<input type="button" value="변경" id="changeBtn" >
+		</form>
+		<div id = "result"></div>
+	</div>
+	
+	<div class = "box" id = "box2">
+		<h3></h3>
+		<div>
+			체크박스 (전체선택/해제)<br>
+			<input type = "checkbox" class = "checkAll">전체선택
+			<input type = "checkbox" class = "check">1
+			<input type = "checkbox" class = "check">2
+			<input type = "checkbox" class = "check">3
+			<input type = "checkbox" class = "check">4
+			<input type = "checkbox" class = "check">5
+		
+		</div>
+		
+		
+		<div>
+		
+			체크박스 (전체선택/해제)<br>
+			<input type = "checkbox" class = "checkAll">전체선택
+			<input type = "checkbox" class = "check">1
+			<input type = "checkbox" class = "check">2
+			<input type = "checkbox" class = "check">3
+			<input type = "checkbox" class = "check">4
+			<input type = "checkbox" class = "check">5
+		
+		</div>
+		<div>
+		
+			체크박스 (전체선택/해제)<br>
+			<input type = "checkbox" class = "checkAll">전체선택
+			<input type = "checkbox" class = "check">1
+			<input type = "checkbox" class = "check">2
+			<input type = "checkbox" class = "check">3
+			<input type = "checkbox" class = "check">4
+			<input type = "checkbox" class = "check">5
+		
+		</div>
+		
+	</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
