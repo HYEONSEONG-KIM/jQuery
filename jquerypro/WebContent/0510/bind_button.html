@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel = "stylesheet" href = "../css/outstyle.css">
+<script src = "../js/jquery-3.6.0.min.js" type = "text/javascript"></script>
+
+<script type="text/javascript">
+	
+	$(function(){
+		$('.but').on('click', function(){
+			
+			// 새로운 버튼을 생성
+			$('<input>',{
+				'type' : 'button',
+				'class' : 'but',
+				'value' : 'newButton'
+			}).appendTo($('#box1 .result'))
+			
+		})
+		
+		$('.clear').on('click',function(){
+			$('.but').off('click');
+			
+		})
+		
+		
+		
+	})
+	
+
+</script>
+
+</head>
+<body>
+	<div class = "box" id = "box1">
+		<h3>
+		bind방식의 이벤트 핸들러 설정<br>
+		$('.but').on('click', function(){})<br>
+		
+		실행 이전에 이미 document에 생성되어 있는 요소에만 이벤트 핸들러가 동작되어짐<br>
+		</h3>
+		<div>
+			<input type = "button" class = "but" value = "버튼1">
+			<input type = "button" class = "but" value = "버튼2">
+			<input type = "button" class = "but" value = "버튼3">
+		</div>
+		
+		<input type = "button" class = "clear" value = "해제">
+		
+		<!-- $('#box1 div").last() -->
+		<div class = "result"></div>
+	</div>
+
+</body>
+</html>
+
+
