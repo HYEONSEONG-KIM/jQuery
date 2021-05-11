@@ -32,6 +32,25 @@
 			$(this).hide();
 		})
 		
+		temp = "";
+		
+		$('img').on('mouseover',function(){
+			// img의 src 속성값을 가져오기
+			vsrc = $(this).attr('src');
+			// temp변수에 대입 - mouseout에서 사용
+			temp = vsrc;
+			// img의 src2의 속성값 가져오기
+			vsrc2 = $(this).attr('src2');
+			
+			$(this).attr('src', vsrc2);
+			
+		})
+		
+		$('img').on('mouseout',function(){
+			$(this).attr('src',temp);
+		})
+		
+		
 	})
 	
 
@@ -41,13 +60,15 @@
 <body>
 	<div class = "box" id = "box1">
 		<h3>
-		dblclick : 이벤트를 발생하려면 더블클릭
+		dblclick : 이벤트를 발생하려면 더블클릭<br>
+		mouseover: 이미지 변경<br>
+		mouseout : 원래 이미지로 변경<br>
 		</h3>
 		
 		<div>
-			<img src = "../images/shopping.jpg" alt="">
-			<img src = "../images/pattern.jpg" alt="">
-			<img src = "../images/게시판수정.png" alt="">
+			<img src = "../images/shopping.jpg" src2 = "../images/가구1.jpg" alt="">
+			<img src = "../images/pattern.jpg" src2 = "../images/가구2.jpg" alt="">
+			<img src = "../images/게시판수정.png" src2 = "../images/가구3.jpg" alt="">
 		</div>
 		
 		<input type = "button" value ="보이기" >

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel = "stylesheet" href = "../css/outstyle.css">
+<style>
+	#box2 div{
+		width: 300px;
+		height: 200px;
+		background: pink;
+		word-wrap : break-word
+	}
+	#box2 span{
+		display : block;
+		width : 220px;
+		height: 130px;
+		background: yellow;
+	}
+	#box2 button{
+		position : relative;
+		top:40px;
+		left : 50px;
+	}
+
+</style>
+
+<script src = "../js/jquery-3.6.0.min.js" type = "text/javascript"></script>
+
+<script type="text/javascript">
+
+	$(function(){
+		$('#link').on('click', function(){
+			// 나이 입력
+			age = parseInt(prompt("나이를 입력하세요"));
+			// 나이를 비교 15미만 페이지 이동 금지
+			if(age < 15){
+				event.preventDefault();
+				alert("이동불가")
+				//return false;
+			}
+			
+		})
+		
+	/* 	button요소 클릭시 배경색 변경
+		span요소 클릭시 테두리 변경,
+		div요소 클릭시 Hello~글자 추가 */
+		$('#box2 button').on('click',function(){
+			$(this).css('background', 'green');
+			event.stopPropagation()
+			//return false
+		})
+		
+		$('#box2 span').on('click',function(){
+			$(this).css('border', '2px solid red');
+			event.stopPropagation()
+		})
+		
+		 $('#box2 div').on('click',function(){
+			$(this).append('hello~~');
+			event.stopPropagation()
+		}) 
+		
+	})	
+
+</script>
+
+</head>
+<body>
+	<div class = "box" id = "box1">
+		<h3>
+		event.preventDefault()<br>
+		: 요소의 기본이벤트 실행 금지<br>
+		</h3>
+		<p><a onclick = "proc1()" id = "link" href="http://www.naver.com">네이버</a>로이동</p>
+	</div>
+	
+	<div class = "box" id = "box2">
+		<h3>
+		event.stopPropagation()<br>
+		: Dom트리의 이벤트 버블링을 막는다, return false로 대신 할 수 있다<br>
+		</h3>
+		
+		 <div> 
+	          <span> 
+	               <button> 클릭하세요</button>  
+	          </span>
+  		</div>
+  		<br><hr color="red"><br>
+	</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
