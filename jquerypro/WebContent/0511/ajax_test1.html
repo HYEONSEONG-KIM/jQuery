@@ -16,7 +16,8 @@
 			
 			//응답
 			req.onreadystatechange = function(){
-				
+				console.log("state : " + this.readyState);
+				console.log("status : " + this.status);
 				if(this.readyState == 4 && this.status == 200){
 					
 					res = this.responseText;
@@ -57,7 +58,37 @@
 	<div class = "box" id = "box1">
 		<h3>
 		확인 버튼 클릭 => 서버로 데이터 요청하고 응답 받은 데이터를 출력<br>
-		ajax이용
+		ajax이용<br>
+		$('#box1 input:button').on('click',function(){<br>
+			// 서버로 요청 - request객체 필요<br>
+			<br>
+			req = new XMLHttpRequest();<br>
+			<br>
+			//응답<br>
+			req.onreadystatechange = function(){<br>
+				<br>
+				if(this.readyState == 4 && this.status == 200){<br>
+					<br>
+					res = this.responseText;<br>
+					//res = 홍길동/개나리/진달래/무궁화/수선화<br>
+					aa = res.split("/"); // 배열리턴<br>
+					code = "&lt;ul>";<br>
+					<br>
+					$.each(aa,function(i,v){<br>
+						code += "&lt;li>" + v + "&lt;/li>";<br>
+					})<br>
+					code += "&lt;/ul>";<br>
+					$('#result1').html(code);<br>
+				}<br>
+				<br>
+			}<br>
+			<br>
+			//요청
+			req.open("get", "reqTest.jsp", true);
+			req.send();
+
+			
+		})
 		</h3>
 		<input type = "button" value = "확인">
 		<br><br>
@@ -68,7 +99,13 @@
 		
 		<h3>
 		확인 버튼 클릭 => 서버로 데이터 요청하고 응답 받은 데이터를 출력<br>
-		ajax가 아닌 방식
+		ajax가 아닌 방식<br>
+			$('#box2 input:button').on('click',function(){<br>
+			$('form').attr('action','oldTest.jsp');<br>
+			$('form').attr('method','get');<br>
+			$('form').submit();<br>
+			<br>
+		})<br><br>
 		</h3>
 			
 		<form>

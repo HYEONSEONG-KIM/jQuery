@@ -41,12 +41,14 @@
 			$('#start').prop('disabled',false);
 		})
 		
+		
 		$('#box2 .di img').on('click',function(){
 			
 			ran = parseInt(Math.random() * 6) + 5;
 			res = `<p>${ran}%</p>`
 			$(this).siblings('p').remove();
 			$(this).parent().append(res);
+			$(this).off('click');
 			
 		})
 	})

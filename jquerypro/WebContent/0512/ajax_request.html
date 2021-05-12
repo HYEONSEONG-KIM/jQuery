@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel = "stylesheet" href = "../css/outstyle.css">
+<style>
+	td{
+		width : 200px;
+		height: 50px;
+		text-align: center;
+		padding : 5px;
+	}
+	tr:nth-child(1){
+		font-weight: bold;
+		font-size : 1.4em;
+	}
+</style>
+<script src = "../js/jquery-3.6.0.min.js" type = "text/javascript"></script>
+
+<script type="text/javascript">
+
+			req = new XMLHttpRequest();
+	$(function(){
+		$('#box1 input:button').on('click', function(){
+			// request 객체 생성
+			// 요청
+			req.open("get", 'jsonTest.jsp', true);
+			req.send();
+			// 응답
+			req.onreadystatechange = function(){
+				
+				if(this.readyState == 4 && this.status == 200){
+					// JSON.parse하기 위해서는 응답데이터가 json형식이어야 함
+					data = JSON.parse(this.responseText);	
+					res = "<ul>";
+					$.each(data, function(i,v){
+						res += "<li>" + v + "</li>";
+					})
+					
+					res += "</ul>";
+					
+					$('#result1').html(res);
+				}
+				
+			}
+		
+		})
+
+		
+		$('#box2 input:button').on('click',function(){
+			
+			req.open("get", "jsonObjTest.jsp", true);
+			req.send();
+			
+			req.onreadystatechange = function(){
+				if(this.readyState == 4 && this.status == 200){
+					data = JSON.parse(this.responseText);
+					
+					res = `이름 : ${data.name}<br>`;
+					res += `전화번호 : ${data.tel}<br>`;
+					res += `주소 : ${data.addr}<br>`;
+					res += `이메일: ${data.email}<br>`;
+					
+					$('#result2').html(res);
+				}
+			}
+			
+		})
+		
+		$('#box3 input:button').on('click', function(){
+			req.open("get", "jsonObjArr.jsp", true);
+			req.send();
+			
+			req.onreadystatechange = function(){
+				
+				if(this.readyState == 4 && this.status == 200){
+					data = JSON.parse(this.responseText);
+					res = "<table border =1>";
+					res +="<tr><td>이름</td><td>주소</td><td>전화번호</td></tr>"
+					$.each(data,function(i){
+						res += `<tr><td>${data[i].name}</td><td>${data[i].addr}</td><td>${data[i].tel}</td>`; 
+					})
+					res += "</table>"
+					
+					$('#result3').html(res);
+				}
+				
+			}
+			
+		})
+		
+		
+	})
+
+</script>
+
+</head>
+<body>
+	<div class = "box" id = "box1">
+		<h3>
+		jsp에서 배열 형태의 json 데이터 가져오기<br>
+		- 반복문 사용<br>
+		["홍길동", "개나리", "강아지", "진달래", "수선화"]<br>
+		</h3>
+		
+		<input type = "button" value = "확인">
+		<div id = "result1"></div>
+	
+	</div>
+	
+	<div class = "box" id = "box2">
+		<h3>
+		jsp에서 객체 형태의 json 데이터 가져오기<br>
+		- 참조연산(.)과 key값을 이용하여 value값 가져오기<br>
+		{<br>
+		"name" : "홍길동",<br>
+		"tel" : "010-1234-5678",<br>
+		"addr" : "대전광역시 중구 대흥동 대덕인재개발원",<br>
+		"email" : "aaa@ddit.or.kr"<br>
+		}<br>
+		</h3>
+		
+		<input type = "button" value = "확인">
+		<div id = "result2"></div>
+	
+	</div>
+	
+	
+	<div class = "box" id = "box3">
+		<h3>
+		jsp에서 배열(인덱스 요소가 객체) 형태의 json 데이터 가져오기<br>
+		- 반복문이용후 . 이용<br>
+		[<br>
+	{<br>
+		"name" : "홍길동",<br>
+		"addr" : "대전",<br>
+		"tel"  : "010-1234-5678"<br>
+	},<br>
+	{<br>
+		"name" : "일지매",<br>
+		"addr" : "서울",<br>
+		"tel"  : "010-7897-2318"	<br>
+	},<br>
+	{<br>
+	
+		"name" : "진달래",<br>
+		"addr" : "부산",<br>
+		"tel"  : "010-2234-1278"<br>
+	},<br>
+	{<br>
+		"name" : "라일락",<br>
+		"addr" : "경기도",<br>
+		"tel"  : "010-1534-7758"<br>
+	}<br>
+]<br>
+		</h3>
+		
+		<input type = "button" value = "확인">
+		<div id = "result3"></div>
+	
+	</div>
+
+</body>
+</html>
+
+
