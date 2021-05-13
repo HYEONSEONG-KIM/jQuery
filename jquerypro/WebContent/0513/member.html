@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel = "stylesheet" href = "../css/outstyle.css">
+
+<style>
+	#par{
+		display: flex;
+		flex-direction : row;
+	
+	}
+	#result1{
+		width : 30%;
+		height : 500px;
+		overflow: auto;
+	}
+	
+	#detail{
+		width: 60%;
+	}
+</style>
+<script src = "../js/jquery-3.6.0.min.js" type = "text/javascript"></script>
+
+<script type="text/javascript">
+
+	$(function(){
+		
+		const req = new XMLHttpRequest();
+		
+		$('#box1 input:button').on('click', function(){
+		
+			req.open("get", "allMember.jsp", true);
+			req.send();
+			
+			req.onreadystatechange = function(){
+				
+				if(this.readyState == 4 && this.status == 200){
+					data = JSON.parse(this.responseText);
+					res = "";
+					$.each(data, function(i){
+						res += `<p> <span>이름 : ${data[i].name} </span> &nbsp&nbsp`
+						res += "<span><a class = 'uid' href = '#'>" + data[i].id + "</a></span>";
+					})
+					
+					
+					$('#result1').html(res);
+					
+				}
+				
+			}
+			
+		})
+		
+		$('#result1').on('click','.uid',function(){
+			vid = $(this).text();
+			
+			// 요청
+			req.open("get" ,"detail.jsp?id=" +vid);
+			req.send();
+			// 응답
+			req.onreadystatechange = function(){
+				
+				if(this.readyState == 4 && this.status == 200){
+					data = JSON.parse(this.responseText);
+					
+					res = `<p>이름 : ${data.이름}</p>`;
+					res += `<p>주소 : ${data.주소}</p>`;
+					res += `<p>전화번호 : ${data.전화번호}</p>`;
+					res += `<p>이메일 : ${data.이메일}</p>`;
+					res += `<p>생일 : ${data.생일}</p>`;
+					
+					$('#detail').html(res);
+					
+				}
+			}
+			
+		})
+		
+	})
+	
+	
+
+</script>
+
+</head>
+<body>
+	<div class = "box" id = "box1">
+		<h3>
+		
+		왼쪽 div에 간략한 member정보 출력<br>
+		왼쪽에서 클릭한 회원의 상세정보 오른쪽 div에 출력<br>
+		(자세한 코드 개발자모드에서 확인)
+		</h3>
+		<input type = "button" value = "확인">
+		<br><br>
+		<div id = 'par'>
+			<div id = "result1"></div>
+		
+			<div id = "detail"></div>
+		</div>
+	</div>
+
+</body>
+</html>
+
+

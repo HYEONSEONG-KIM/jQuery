@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel = "stylesheet" href = "../css/outstyle.css">
+<script src = "../js/jquery-3.6.0.min.js" type = "text/javascript"></script>
+
+<script type="text/javascript">
+	
+	$(function(){
+	
+		$('#box1 input:button').on('click', function(){
+			vid = $('#box1 :text').val();
+			vpass = $('#box1 :password').val();
+			
+			$.ajax({
+				url : 'jqAjax.jsp',
+				type : 'post',
+				data : "id=" + vid +"&pass=" + vpass,
+				success:function(data){
+					
+				},
+				error:function(xhr){
+					alert("상태 : " + xhr.status)
+				},
+				dataType : 'json'
+			})
+		
+		})
+	})
+	
+	
+
+</script>
+
+</head>
+<body>
+	<div class = "box" id = "box1">
+		<h3></h3>
+		
+		<form>
+			id : <input type = "text"><br>
+			pass : <input type = "password"><br>
+			<input type = "button" value = "전송">
+		</form>
+	</div>
+
+</body>
+</html>
+
+
