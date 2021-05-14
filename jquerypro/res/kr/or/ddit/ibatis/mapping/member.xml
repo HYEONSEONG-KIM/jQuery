@@ -11,4 +11,8 @@
 	<select id="selectOne" resultClass="memberVo" parameterClass="string">
 		select * from member where mem_id = #id#
 	</select>
+	
+	<select id="login" resultClass="memberVo" parameterClass="map">
+		select * from member where mem_id = #mem_id# and mem_pass = #mem_pass#
+	</select>
 </sqlMap>

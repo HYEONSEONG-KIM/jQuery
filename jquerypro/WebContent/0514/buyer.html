@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel = "stylesheet" href = "../css/outstyle.css">
+<style>
+	table{
+	border-collapse:collapse;
+	}
+	#name{
+		width: 300px;
+		text-align: center;
+		
+	}
+	#detail1{
+		width : 500px;
+		border-right: none;
+	}
+	#detail1 p{
+		margin : 20px;
+	}
+	#detail2 p{
+		margin : 20px;
+	}
+	
+	#detail2{
+	 	width : 500px;
+	 	border-left : none;
+	 }
+	
+	#name p:hover {
+		text-decoration: none;
+		background : lightgreen;
+		font-weight: bold;
+	}
+}
+</style>
+<script src = "../js/jquery-3.6.0.min.js" type = "text/javascript"></script>
+
+<script type="text/javascript">
+
+	$(function(){
+		$.get(
+				'buyerNames.jsp', 
+				function(data){
+					res = "";
+					$.each(data,function(i,v){
+						
+						res = $('<p></p>',{
+								'id' : v.id,
+								'class' : 'name',
+								'text' : v.name
+						})
+						$('#result #name').append(res);
+					})
+					
+				},
+				'json'
+		)
+		
+		$('#result').on('click', '.name',function(){
+			 vid = $(this).attr('id');
+			 $.post(
+					'buyerDatail.jsp',
+					'id=' + vid,
+					function(data){
+						res1 = "";
+						res2 = "";
+						
+						res1 += `<p>buyer_id</p>`;
+						res1 += `<p>buyer_name</p>`;
+						res1 += `<p>buyer_lgu </p>`;
+						res1 += `<p>buyer_bank </p>`;
+						res1 += `<p>buyer_bankno</p>`;
+						res1+= `<p>buyer_bankname </p>`;
+						res1 += `<p>buyer_zip</p>`;
+						res1 += `<p>buyer_add</p>`;
+						res1 += `<p>buyer_mail</p>`;
+						
+						res2 += `<p>${data.buyer_id}</p>`;
+						res2 += `<p>${data.buyer_name}</p>`;
+						res2 += `<p>${data.buyer_lgu}</p>`;
+						res2 += `<p>${data.buyer_bank}</p>`;
+						res2 += `<p>${data.buyer_bankno}</p>`;
+						res2 += `<p>${data.buyer_bankname}</p>`;
+						res2 += `<p>${data.buyer_zip}</p>`;
+						res2 += `<p>${data.buyer_add1}</p>`;
+						res2 += `<p>${data.buyer_mail}</p>`;
+						
+						
+						/* res += `<p>buyer_id : ${data.buyer_id}</p>`;
+						res += `<p>buyer_name : ${data.buyer_name}</p>`;
+						res += `<p>buyer_lgu : ${data.buyer_lgu}</p>`;
+						res += `<p>buyer_bank : ${data.buyer_bank}</p>`;
+						res += `<p>buyer_bankno : ${data.buyer_bankno}</p>`;
+						res += `<p>buyer_bankname : ${data.buyer_bankname}</p>`;
+						res += `<p>buyer_zip : ${data.buyer_zip}</p>`;
+						res += `<p>buyer_add : ${data.buyer_add1} ${data.buyer_add2}</p>`;
+						res += `<p>buyer_mail : ${data.buyer_mail}</p>`; */
+						
+						$('#detail1').html(res1);
+						$('#detail2').html(res2);
+					},
+					'json'
+			) 
+		})
+	})
+	
+
+	
+</script>
+
+</head>
+<body>
+	<div class = "box" id = "box1">
+		<h3></h3>
+		<div id = "result">
+			<table border =1>
+				<tr>
+					<th>거래처이름</th>
+					<th colspan="2">거래처 상세정보</th>
+					
+				</tr>
+				
+				<tr>
+					<td id = "name"></td>
+					<td id = "detail1"></td>
+					<td id = "detail2"></td>
+					
+				</tr>
+			
+			</table>
+			
+		</div>
+	</div>
+
+</body>
+</html>
+
+

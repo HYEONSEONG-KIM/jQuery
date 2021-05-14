@@ -20,6 +20,15 @@
 				data : "id=" + vid +"&pass=" + vpass,
 				success:function(data){
 					
+					res = "";
+					if(data.sw == "OK"){
+						res += data.name + "님 환영합니다";
+					}else{
+						
+						res += data.name;
+					}
+					
+					$('#result1').html(res);
 				},
 				error:function(xhr){
 					alert("상태 : " + xhr.status)
@@ -44,6 +53,8 @@
 			pass : <input type = "password"><br>
 			<input type = "button" value = "전송">
 		</form>
+		
+		<div id = "result1"></div>
 	</div>
 
 </body>

@@ -46,6 +46,7 @@
 	<sqlMap resource="kr/or/ddit/mvc/ibatis/memberTest.xml"/> -->
 	<!-- <sqlMap resource="kr/or/ddit/basic/lprod.xml"/> -->
 	<sqlMap resource="kr/or/ddit/ibatis/mapping/member.xml"/>
+	<sqlMap resource="kr/or/ddit/ibatis/mapping/buyer.xml"/>
 	
 </sqlMapConfig>
 
