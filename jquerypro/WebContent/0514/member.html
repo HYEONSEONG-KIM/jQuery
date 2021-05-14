@@ -34,6 +34,35 @@
 			})
 		})
 		
+		$('#box2 input:button').on('click', function(){
+			$.ajax({
+				url : 'lprod.jsp',
+				type : 'get',
+				dataType : 'json',
+				success : function(data){
+					res = `<table border = "1">`;
+					res += `<tr><th>ID</th>`;
+					res += `<th>GU</th>`;
+					res += `<th>NM</th></tr>`;
+					$.each(data, function(i,v){
+						
+						res += `<tr><td>${v.Lprod_id}</td>`;
+						res += `<td>${v.Lprod_gu}</td>`;
+						res += `<td>${v.Lprod_nm}</td></tr>`;
+						
+					})
+					res += `</table>`;
+					$('#result2').html(res);
+					
+				},
+				error : function(xhr){
+					alert("상태: " + xhr.status);
+				}
+				
+			})
+			
+		})
+		
 	})
 	
 	
@@ -43,10 +72,21 @@
 </head>
 <body>
 	<div class = "box" id = "box1">
-		<h3></h3>
+		<h3>
+		member테이블의 정보 출력
+		</h3>
 		<input type = "button" value = "확인">
 		<br><br>
 		<div id = "result1"></div>
+	</div>
+	
+	<div class = "box" id = "box2">
+		<h3>
+		lprod테이블의 정보 출력
+		</h3>
+		<input type = "button" value = "확인">
+		<br><br>
+		<div id = "result2"></div>
 	</div>
 
 </body>
