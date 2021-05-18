@@ -26,6 +26,7 @@
 	 -->
 	 <!-- <typeAlias alias="lprodVo" type="kr.or.ddit.basic.LprodVO"/> -->
 	 <typeAlias alias="memberVo" type="kr.or.ddit.member.vo.MemberVO"/>
+	 <typeAlias alias="zipVo" type="kr.or.ddit.member.vo.ZipVO"/>
 	
 	<!-- DB와의 연결을 처리하는 부분 -->
 	<transactionManager type="JDBC">

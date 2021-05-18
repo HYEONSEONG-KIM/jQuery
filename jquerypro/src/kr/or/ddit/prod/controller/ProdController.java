@@ -63,7 +63,27 @@ public class ProdController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
+		String id = request.getParameter("id");
+		ProdVO prod = service.selectProdName(id);
+		
+		request.setAttribute("prodvo", prod);
+		RequestDispatcher rd = 
+				request.getRequestDispatcher("0517/prodDetail.jsp");
+		rd.forward(request, response);
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

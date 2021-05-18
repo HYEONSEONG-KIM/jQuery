@@ -3,6 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
 <link rel = "stylesheet" href = "../css/outstyle.css">
 <script src = "../js/jquery-3.6.0.min.js" type = "text/javascript"></script>
 
@@ -18,6 +24,7 @@
 					res += `<option value = '${v.Lprod_gu}'> ${v.Lprod_nm}</option>`;
 				})
 					$('#lprod').html(res);
+					$('#lprod').trigger('change');
 				
 			},
 			error: function(xhr){
@@ -42,11 +49,20 @@
 							res += `<option value = '${v.id}'>${v.nm}</option>`;						
 						})
 						
-						$('#prod').html(res);
+						
 						
 					}else{
-						$('#prod').html(res);
+						res += `<option value = '0'>데이터 없음</option>`;
+						$('#detail').empty();
+						/* $("<img>",{
+							'src' : '../images/딸기스무디.jpg',
+							'alt' : '딸기스무디',
+							'width' : '100px',
+							'height' : '100px'
+						}).appendTo('#detail') */
 					}
+					$('#prod').html(res);
+					$('#prod').trigger('change');
 				},
 				error : function(xhr){
 					alert(xhr.status);
@@ -56,6 +72,33 @@
 			})
 		})
 		
+		// prod를 선택하면 상세보기
+		$('#prod').on('change', function(){
+			param = $(this).val()
+			
+			$.ajax({
+				url :'/jquerypro/Prod.do',
+				type : 'post',
+				data : {"id" : param},
+				success : function(data){
+					
+					if(data.sw == "OK"){
+						res = `<table class="table table-striped"  border = 1>`;
+						res += `<tr><td>id</td><td>${data.id}</td></tr>`;
+						res += `<tr><td>name</td><td>${data.nm}</td></tr>`;
+						res += `<tr><td>lgu</td><td>${data.lgu}</td></tr>`;
+						res += `<tr><td>price</td><td>${data.price}원</td></tr>`;
+						res += `<tr><td>detail</td><td>${data.detail}</td></tr>`;
+						$('#detail').html(res);
+					}
+					
+				},
+				error : function(xhr){
+					alert(xhr.status);
+				},
+				dataType : 'json'
+			})
+		})
 		
 	})
 	
@@ -66,13 +109,27 @@
 <body>
 	<div class = "box" id = "box1">
 		<h3></h3>
-		<select id = "lprod"></select>
-		
-		<select id = "prod"></select>
+		<div class="container">
+		  <h2>Form control: select</h2>
+		 
+		  <form>
+		    <div class="form-group">
+		      <label for="sel1">Select list (select one):</label>
+		      <select class="form-control" id="lprod">
+		        
+		      </select>
+		      
+		       <label for="sel1">Select list (select one):</label>
+		      <select class="form-control" id="prod">
+		   
+		      </select>
+		      </div>
+		 
+		 </form>
 		
 		<div id = "detail"></div>
 	</div>
-
+</div>
 </body>
 </html>
 

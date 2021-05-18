@@ -12,7 +12,7 @@
 	</select>
 	
 	<select id="selectProdName" resultClass="prodVo" parameterClass="string">
-		select prod_name, prod_id from prod where prod_id = #id#
+		select * from prod where prod_id = #id#
 	</select>
 
 </sqlMap>

@@ -13,6 +13,9 @@ public class MemberVO {
 	private String mem_mail;
 	
 	
+	
+	
+	
 	public String getMem_id() {
 		return mem_id;
 	}
