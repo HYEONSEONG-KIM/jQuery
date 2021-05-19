@@ -27,6 +27,7 @@ public class MemberDaoImple implements IMemberDao {
 	@Override
 	public String idCheck(String mem_id) throws SQLException {
 		String id = (String)smc.queryForObject("member.idCheck", mem_id);
+		
 		return id;
 	}
 
