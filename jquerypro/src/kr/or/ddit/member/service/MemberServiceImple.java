@@ -1,6 +1,7 @@
 package kr.or.ddit.member.service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import kr.or.ddit.member.dao.IMemberDao;
 import kr.or.ddit.member.dao.MemberDaoImple;
@@ -37,9 +38,9 @@ public class MemberServiceImple implements IMemberService {
 	}
 
 	@Override
-	public ZipVO searchZip(String input) {
+	public List<ZipVO> searchZip(String input) {
 		// TODO Auto-generated method stub
-		ZipVO zip = null;
+		List<ZipVO> zip = null;
 		try {
 			zip = dao.searchZip(input);
 		} catch (SQLException e) {
@@ -50,13 +51,15 @@ public class MemberServiceImple implements IMemberService {
 	}
 
 	@Override
-	public void insertMember(MemberVO memVo) {
+	public String insertMember(MemberVO memVo) {
+		String id = null;
 		try {
-			dao.insertMember(memVo);
+			id = dao.insertMember(memVo);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return id;
 	}
 
 }

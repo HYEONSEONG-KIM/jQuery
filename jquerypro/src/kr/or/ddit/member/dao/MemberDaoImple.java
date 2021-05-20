@@ -1,6 +1,7 @@
 package kr.or.ddit.member.dao;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 
@@ -32,14 +33,15 @@ public class MemberDaoImple implements IMemberDao {
 	}
 
 	@Override
-	public ZipVO searchZip(String input) throws SQLException {
-		ZipVO zip = (ZipVO)smc.queryForObject("member.searchZip", input);
+	public List<ZipVO> searchZip(String input) throws SQLException {
+		List<ZipVO> zip = smc.queryForList("member.searchZip", input);
 		return zip;
 	}
 
 	@Override
-	public void insertMember(MemberVO memVo) throws SQLException {
-		 smc.insert("member.insertMember",memVo);
+	public String insertMember(MemberVO memVo) throws SQLException {
+		 String id = (String)smc.insert("member.insertMember",memVo);
+		 return id;
 	}
 
 }

@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src = "../js/jquery.serializejson.min.js"></script>
 <script type="text/javascript">
 
 	$(function(){
@@ -20,7 +21,6 @@
 				data : {'id' : input},
 				success : function(data){
 					res = "";
-					
 					if(data.sw == "no"){
 						res += "이미 존재하는 ID입니다";
 					}else{
@@ -33,6 +33,35 @@
 				},
 				dataType : 'json'
 			})
+		})
+		
+		$('#search').on('click',function(){
+			// 새로운 창 열기
+			//window.open(새창경로, 논리적경로(target or 화면상에 보이지 않는 이름),스타일)
+			a= window.open("search.jsp","우편번호찾기","width=500 height=400 top=200 left=300");
+			a.moveBy(100,100)
+		})
+		
+		$('form').on('submit',function(){
+			event.preventDefault();
+			datas = $('form').serialize();
+			console.log(datas);
+			datas = $('form').serializeArray();
+			console.log(datas);
+			datas = $('form').serializeJSON();
+			console.log(datas);
+			
+	/* 		$.ajax({
+				
+				url : '/jquerypro/InsertMember.do',
+				type : 'post',
+				success : function(){
+					
+				},
+				error : function(xhr){
+					alert(xhr.status);
+				},
+			})  */
 			
 		})
 		
@@ -57,7 +86,7 @@
     <div class="form-group">
       <label class="control-label col-sm-2" for="name">Name:</label>
       <div class="col-sm-3">
-        <input type="email" class="form-control" id="name" placeholder="Enter Name" name="mem_name">
+        <input type="text" class="form-control" id="name" placeholder="Enter Name" name="mem_name">
       </div>
     </div>
     <div class="form-group">
@@ -89,7 +118,7 @@
       <div class="col-sm-3">          
         <input type="text" class="form-control" id="zip" placeholder="Enter Zip" name="mem_zip">
       </div>
-      <button class = "btn btn-default" type="button">Search Zip</button>
+      <button id = "search" class = "btn btn-default" type="button">Search Zip</button>
     </div>
      <div class="form-group">
       <label class="control-label col-sm-2" for="Address1">Address1:</label>
@@ -112,8 +141,9 @@
     </div>
     <div class="form-group">        
       <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+        <button  type="submit" class="btn btn-primary btn-lg">Submit</button>
       </div>
+      <span id = "joinspan"></span>
     </div>
   </form>
 </div>

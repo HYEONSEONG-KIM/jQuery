@@ -3,7 +3,6 @@
 
 <%
 	String id = (String)request.getAttribute("chkId");
-	System.out.println(id);
 	if(id != null){
 		%>
 		{
