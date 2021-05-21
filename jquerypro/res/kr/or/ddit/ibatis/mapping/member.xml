@@ -26,10 +26,10 @@
 	
 	<insert id="insertMember" parameterClass="memberVo">
 	insert into member(MEM_ID,MEM_PASS,MEM_NAME,MEM_BIR,
-	MEM_ZIP,MEM_ADD1,MEM_ADD2,MEM_HP,MEM_MAIL) 	values(#mem_id#,#mem_pass#,#mem_name#,#mem_bir#,#mem_zip#,#mem_add1#,#mem_add2#,
-	#mem_hp#,#mem_mail#)
+	MEM_ZIP,MEM_ADD1,MEM_ADD2,MEM_HP,MEM_MAIL) values(#mem_id#, #mem_pass#, #mem_name#, 
+	#mem_bir#, #mem_zip#,#mem_add1#,#mem_add2#,#mem_hp#,#mem_mail#)
 		<selectKey keyProperty="mem_id" resultClass="string">
-			select mem_id from member where mem_id = #id#
+			select mem_id from member where mem_id = #mem_id#
 		</selectKey>
 	</insert>
 </sqlMap>

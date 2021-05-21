@@ -8,19 +8,25 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src = "../js/jquery.serializejson.min.js"></script>
+<script src = "../js/memberReg.js"></script>
 <script type="text/javascript">
 
 	$(function(){
 		
+		flag = "";
+		
 		$('#checkbtn').on('click',function(){
-			input = $('#id').val()
-			
+			input = $('#id').val().trim();
+			if(!idcheck()){
+				return false;
+			}
 			$.ajax({
 				url : '/jquerypro/CheckId.do',
 				type : 'get',
 				data : {'id' : input},
 				success : function(data){
 					res = "";
+					flag = data.sw;
 					if(data.sw == "no"){
 						res += "이미 존재하는 ID입니다";
 					}else{
@@ -35,35 +41,142 @@
 			})
 		})
 		
+		// 각 요소 체크 - 실시간 체크
+		$('#name').on('keyup', function(){
+			// name 입력값 가져오기
+			namevalue = $('#name').val().trim();
+			console.log(namevalue);
+			
+			// 길이체크 2~5
+			if(namevalue.length < 2 || namevalue.length > 5){
+				nopro(this, "2~5글자 사이입니다");
+				return false;
+			}
+
+			// 정규식 - 한글
+			regname = /^[가-힣]{2,5}$/
+			
+			if(regname.test(namevalue)){
+				okpro(this);
+				
+			}else{
+				nopro(this, "올바른 형식이 아닙니다");
+			}
+		})
+		
+		// 비밀번호 체크
+		$('#pwd').on('keyup',function(){
+			// 입력값
+			passValue = $(this).val().trim();
+			
+			// 길이 체크
+			
+			
+			// 정규식 - 영문대소문자, 특수문자, 숫자가 반드시 한개 이상
+			if(passValue.length < 8 || passValue.length > 12){
+				nopro(this, "8~12글자 사이입니다");
+				return false;
+			}
+			// 전방탐색 - 찾을 문자?= 기준문자
+			// * -> 0번 이상
+			regpass = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()]).{8,12}$/
+			if(regpass.test(passValue)){
+				okpro(this);
+			}else{
+				nopro(this,"올바른 형식이 아닙니다")
+			}
+		})
+		
+		
+	/* 	// 이메일 체크
+		$('#email').on('keyup',function(){
+			emailValue = $(this).val();
+			
+			regmail = /^[0-9a-zA-Z]+@[0-9a-zA-Z]+(\.[a-z]+){1,2})$/
+			//if(regmail.test(emailValue))
+		})
+		 */
+		
+		// 우편번호 체크
 		$('#search').on('click',function(){
 			// 새로운 창 열기
 			//window.open(새창경로, 논리적경로(target or 화면상에 보이지 않는 이름),스타일)
 			a= window.open("search.jsp","우편번호찾기","width=500 height=400 top=200 left=300");
 			a.moveBy(100,100)
+			
 		})
 		
+		// 가입하기 버튼
 		$('form').on('submit',function(){
 			event.preventDefault();
-			datas = $('form').serialize();
-			console.log(datas);
-			datas = $('form').serializeArray();
-			console.log(datas);
+			/* datas = $('form').serialize();
+			datas = $('form').serializeArray(); */
 			datas = $('form').serializeJSON();
-			console.log(datas);
 			
-	/* 		$.ajax({
+			if(flag != "ok"){
+				alert("ID중복검사 체크");
+				return false;
+			}
+				$.ajax({
 				
 				url : '/jquerypro/InsertMember.do',
 				type : 'post',
-				success : function(){
+				data : datas,
+				success : function(data){
+					res = "";
+					if(data.sw == "ok"){
+						res += "회원가입 성공!!";
+					}else{
+						res += "회원가입 실패...";
+					}
 					
+					$('#joinspan').html(res);
 				},
 				error : function(xhr){
 					alert(xhr.status);
 				},
-			})  */
+				dataType: 'json'
+			})  
 			
 		})
+		
+		// 모달창 검색 버튼 이벤트
+			$('#btncode').on('click',function(){
+			// 입력값 가져오기
+			vdong = $('#dong').val().trim();
+			
+			if(vdong.length < 1){
+				alert("동을 입력하세요");
+				return false;
+			}
+			
+			// 서버로 입력한 동을 data로 보내서 처리
+			$.ajax({
+				url : '/jquerypro/SearchCode.do',
+				type : 'get',
+				data : {'dong' : vdong},
+				success : function(data){
+					$('#result').html(data);
+				},
+				error : function(xhr){
+					alert(xhr.status)
+				},
+				dataType : 'html'
+			})
+		})
+		
+			// 결과 화면에서 하나를 선택하면
+		$('#result').on('click', '.ziptr', function(){
+			zip = $('td:eq(0)', this).text();
+			addr = $('td:eq(1)', this).text();
+			
+			$('#zip').val(zip);
+			$('#Address1').val(addr);
+			
+			// 모달창 닫기
+			$('#myModal').modal('hide');
+		})
+		
 		
 	})
 
@@ -85,30 +198,35 @@
     </div>
     <div class="form-group">
       <label class="control-label col-sm-2" for="name">Name:</label>
+     	<span class = "sp"></span>
       <div class="col-sm-3">
         <input type="text" class="form-control" id="name" placeholder="Enter Name" name="mem_name">
       </div>
     </div>
     <div class="form-group">
       <label class="control-label col-sm-2" for="birth">Birth:</label>
+      	<span class = "sp"></span>
       <div class="col-sm-3">
         <input type="date" class="form-control" id="birth" placeholder="Enter Birth" name="mem_bir">
       </div>
     </div>
      <div class="form-group">
       <label class="control-label col-sm-2" for="pwd">Password:</label>
+      	<span class = "sp"></span>
       <div class="col-sm-3">          
         <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="mem_pass">
       </div>
     </div>
     <div class="form-group">
       <label class="control-label col-sm-2" for="email">Email:</label>
+      	<span class = "sp"></span>
       <div class="col-sm-3">
         <input type="email" class="form-control" id="email" placeholder="Enter email" name="mem_mail">
       </div>
     </div>
      <div class="form-group">
       <label class="control-label col-sm-2" for="hp">HP:</label>
+      	<span class = "sp"></span>
       <div class="col-sm-3">          
         <input type="text" class="form-control" id="hp" placeholder="Enter Phone" name="mem_hp">
       </div>
@@ -119,12 +237,13 @@
         <input type="text" class="form-control" id="zip" placeholder="Enter Zip" name="mem_zip">
       </div>
       <button id = "search" class = "btn btn-default" type="button">Search Zip</button>
+      <button  data-toggle="modal" data-target="#myModal" class = "btn btn-default" type="button">modal Zip</button>
     </div>
      <div class="form-group">
       <label class="control-label col-sm-2" for="Address1">Address1:</label>
       <div class="col-sm-5">          
         <input type="text" class="form-control" id="Address1" placeholder="Enter Address1" name="mem_add1">
-      </div>
+	</div>
     </div>
      <div class="form-group">
       <label class="control-label col-sm-2" for="Address2">Address2:</label>
@@ -142,11 +261,60 @@
     <div class="form-group">        
       <div class="col-sm-offset-2 col-sm-10">
         <button  type="submit" class="btn btn-primary btn-lg">Submit</button>
+  	    <span id = "joinspan"></span>
       </div>
-      <span id = "joinspan"></span>
     </div>
   </form>
 </div>
 
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">우편번호 찾기</h4>
+      </div>
+      <div class="modal-body">
+        <p>찾고자 하는 동을 입력하세요</p>
+		<input type = "text" id = "dong">
+		<input type = "button" value = "검색" id = "btncode">
+		<br><br>
+		<div id = "result"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
