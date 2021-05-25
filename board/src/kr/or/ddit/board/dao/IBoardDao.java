@@ -13,4 +13,7 @@ public interface IBoardDao {
 	
 	// 전체글 갯수 가져오기
 	public int countList() throws SQLException; 
+	
+	// 글쓰기 저장
+	public int insertBoard(BoardVO boardvo) throws SQLException;
 }

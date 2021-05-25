@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel = "stylesheet" href = "../css/board.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -11,15 +12,77 @@
 
 <script type="text/javascript">
 	$(function(){
-		readServer(7);
+		readServer(4);
+		
+		// 글쓰기
+		$('#write').on('click', function(){
+			// 새로운 창 열기
+			$('#wModal').modal('show');
+		})
+		// 글 입력 후 전송
+		$('#send').on('click', function(){
+			// 입력한 값 가져오기
+			writeServer();
+			// 새로운 창 닫기
+			$('#wModal').modal('hide');
+			$('.text').val("");
+		})
+		
+		/* // 모달창 닫기 이벤트
+		$('#wModal').on('hide.bs.modal', function(){
+			
+		}) */
 	})
 </script>
 </head>
 <body>
 <div class = "box" id = "box1">
-		<h3>Accodian 게시글</h3>
+		<h3>Accordion 게시글</h3>
+		
+		<div id = "dwr">
+			<input type = "button" value = "글쓰기" id = "write">
+		</div>
+		
 		<div id = "list"></div>
 	
+	</div>
+	
+	<!-- Modal -->
+	<div id="wModal" class="modal fade" role="dialog">
+	  <div class="modal-dialog">
+	
+	    <!-- Modal content-->
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        <h4 class="modal-title">Modal Header</h4>
+	      </div>
+	      <div class="modal-body">
+		      <form>
+		      	<label>이름</label>
+		       	<input type = "text" class = "text" name = "writer"><br>
+		       	
+		       	<label>제목</label>
+		       	<input type = "text" class = "text" name = "subject"><br>
+		       	
+		       	<label>메일</label>
+		       	<input type = "text" class = "text" name = "mail"><br>
+		       	
+		       	<label>비밀번호</label>
+	       		<input type = "text" class = "text" name = "password"><br>
+		       	
+		       	<label>내용</label><br>
+		       	<textarea rows = "10" cols = "70" class = "text" name = "content"></textarea><br>
+		       	<br>
+		       	<input type = "button" class = "btn btn-success" value = "전송" id = "send">
+		      </form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	
+	  </div>
 	</div>
 </body>
 </html>

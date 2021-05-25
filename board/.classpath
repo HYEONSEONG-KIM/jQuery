@@ -15,5 +15,7 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="lib" path="C:/ddit/Lib/ibatis/ibatis-2.3.4.726.jar"/>
 	<classpathentry kind="lib" path="C:/ddit/Lib/ibatis/ojdbc6.jar"/>
+	<classpathentry kind="lib" path="C:/ddit/Lib/beanUtil/commons-beanutils-1.8.3-bin/commons-beanutils-1.8.3/commons-beanutils-1.8.3.jar"/>
+	<classpathentry kind="lib" path="C:/ddit/Lib/beanUtil/commons-logging-1.1.1-bin/commons-logging-1.1.1/commons-logging-1.1.1.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

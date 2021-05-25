@@ -10,4 +10,6 @@ public interface IBoardService {
 	public List<BoardVO> boardList(Map<String, Integer> map);
 	
 	public int countList();
+	
+	public int insertBoard(BoardVO boardvo);
 }

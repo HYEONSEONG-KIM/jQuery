@@ -1,0 +1,47 @@
+@charset "UTF-8";
+
+p{
+	padding : 5px;
+	margin : 2px; 
+	box-sizing: border-box;
+}
+.p1{
+	float : left;
+	width: calc(63% -1%);
+}
+
+.p2{
+	float: right;
+	width: calc(33% -1%);
+}
+
+.p3{
+	clear : both;	
+}
+
+div{
+	
+}
+
+#list{
+	padding : 10px;
+	margin : 10px;
+}
+
+#write{
+	position : relative;
+	left : 90%;
+}
+
+label{
+	width: 80px;
+}
+
+
+
+
+
+
+
+
+

@@ -37,9 +37,9 @@ public class BoardListServlet extends HttpServlet {
 		pageNum = Integer.parseInt(request.getParameter("page"));
 		
 		// 한 페이지에 출력할 글 갯수
-		int perList = 3;
+		int perList = 5;
 		// 한 화면에 출력할 페이지 수
-		int perPage = 2;
+		int perPage = 3;
 		
 		// 전체글 개수
 		int countList = service.countList();
@@ -48,7 +48,16 @@ public class BoardListServlet extends HttpServlet {
 		int totalPage = (int)Math.ceil((double)countList/ perList);
 		System.out.println(totalPage);
 		
-		// 페이지에 따라서 start, end
+		// 화면에 보여지는 페이지 번호
+		// 1 -> 1,2  2->1,2  3-> 3,4  4->3,4 ...
+		int startPage = ((pageNum - 1) / perPage * perPage) + 1;
+		int endPage = startPage + perPage - 1;
+		
+		if(endPage > totalPage){
+			endPage = totalPage;
+		}
+		
+		// 페이지에 따라서 start, end - 보여지는 게시글
 		int start = (pageNum - 1) * perList + 1;
 		int end = start + perList - 1;
 		
@@ -67,6 +76,9 @@ public class BoardListServlet extends HttpServlet {
 		
 		// request 저장
 		request.setAttribute("list", boardList);
+		request.setAttribute("sp", startPage);
+		request.setAttribute("ep", endPage);
+		request.setAttribute("tp", totalPage);
 		
 		// jsp로 포워딩
 		RequestDispatcher rd = 
