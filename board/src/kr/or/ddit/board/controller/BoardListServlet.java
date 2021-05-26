@@ -39,7 +39,7 @@ public class BoardListServlet extends HttpServlet {
 		// 한 페이지에 출력할 글 갯수
 		int perList = 5;
 		// 한 화면에 출력할 페이지 수
-		int perPage = 3;
+		int perPage = 2;
 		
 		// 전체글 개수
 		int countList = service.countList();

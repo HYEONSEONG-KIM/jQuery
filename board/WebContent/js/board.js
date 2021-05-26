@@ -53,15 +53,60 @@ readServer = function(page){
 				code += '<p class = "p3">';
 				code += v.content
 				code += '</p>';
-					
+				
+				// 댓글쓰기 구성
+				code += '<p class = "p4">';
+				code += '<textarea cols = "100" ></textarea>';
+				code += '<input type = "button" value = "등록" name = "reply" class = "action">'
+				code += '</p>'
+				
 				code +=	'</div>';
 				code += '</div>';
 				code += '</div>';
 				
+				
 			})
 			
 			code += '</div>';
+			
 			$('#list').html(code);
+			
+			// 페이지 리스트 만들기
+			
+			pager = '<div class="container">';
+			// 이전버튼
+			if(data.sp > 1){
+				pager += '<ul class="pager">';
+				pager += '<li><a class = "prev" href="#">Previous</a></li>';
+				pager += '</ul>';
+			}
+			
+			
+			// 페이지 번호 출력
+			pager += '<ul class="pagination pager">';
+			
+			for(i = data.sp; i <= data.ep; i++){
+				// 현재 페이지와 i값이 같은가 비교
+				if(currentPage == i){
+					 pager += '<li class="active"><a class = "paging" href="#">'+ i +'</a></li>';
+				}else{
+					pager += '<li><a class = "paging" href="#">'+ i +'</a></li>';
+				}
+			}
+			
+			 
+			pager += '  </ul>';
+			
+			// 다음버튼
+			if(data.tp > data.ep){
+				pager += '<ul class="pager">';
+				pager += '<li><a class = "next" href="#">Next</a></li>';
+				pager += '</ul>';
+			}
+			
+			pager += '</div>';
+			
+			$('#pageList').html(pager);
 			
 		},
 		error : function(xhr){

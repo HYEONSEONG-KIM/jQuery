@@ -37,7 +37,25 @@ label{
 	width: 80px;
 }
 
+.pager{
+	width : 80px;
+	float : left;
+	margin : 5px;
+	
+}
 
+
+.container{
+	width : 80%;
+	margin-left : 15%;
+} 
+
+
+input[value=등록]{
+	height: 45px;
+	vertical-align: top;
+	margin-left: 5px;
+}
 
 
 
