@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import kr.or.ddit.board.vo.BoardVO;
+import kr.or.ddit.board.vo.ReplyVO;
 
 public interface IBoardDao {
 
@@ -16,4 +17,9 @@ public interface IBoardDao {
 	
 	// 글쓰기 저장
 	public int insertBoard(BoardVO boardvo) throws SQLException;
+
+	//댓글 저장 - renum을 리턴
+	public int insertReply(ReplyVO vo) throws SQLException;
+	
+	public List<ReplyVO> replyList(int bonum) throws SQLException;
 }

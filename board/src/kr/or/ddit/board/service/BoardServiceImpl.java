@@ -7,6 +7,7 @@ import java.util.Map;
 import kr.or.ddit.board.dao.BoardDaoImpl;
 import kr.or.ddit.board.dao.IBoardDao;
 import kr.or.ddit.board.vo.BoardVO;
+import kr.or.ddit.board.vo.ReplyVO;
 
 public class BoardServiceImpl implements IBoardService{
 	
@@ -64,6 +65,34 @@ public class BoardServiceImpl implements IBoardService{
 		}
 		
 		return result;
+	}
+
+	@Override
+	public int insertReply(ReplyVO vo) {
+		int result = 0;
+		
+		try {
+			result = dao.insertReply(vo);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
+	@Override
+	public List<ReplyVO> replyList(int bonum) {
+		List<ReplyVO> replyvo = null;
+		
+		try {
+			replyvo = dao.replyList(bonum);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return replyvo;
 	}
 
 }
