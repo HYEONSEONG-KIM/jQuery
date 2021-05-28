@@ -57,4 +57,16 @@ public class BoardDaoImpl implements IBoardDao{
 		return smc.queryForList("board.replyList", bonum);
 	}
 
+
+	@Override
+	public int replyUpdate(ReplyVO replyvo) throws SQLException {
+		return smc.update("board.replyUpdate",replyvo);
+	}
+
+
+	@Override
+	public int replyDelete(int renum) throws SQLException {
+		return smc.delete("board.replyDelete", renum);
+	}
+
 }

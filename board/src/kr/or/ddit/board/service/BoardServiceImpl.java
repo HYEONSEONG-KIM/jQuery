@@ -95,4 +95,32 @@ public class BoardServiceImpl implements IBoardService{
 		return replyvo;
 	}
 
+	@Override
+	public int replyUpdate(ReplyVO replyvo) {
+		int result = 0;
+		
+		try {
+			result = dao.replyUpdate(replyvo);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
+	@Override
+	public int replyDelete(int renum) {
+		int result = 0;
+		
+		try {
+			result = dao.replyDelete(renum);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
 }

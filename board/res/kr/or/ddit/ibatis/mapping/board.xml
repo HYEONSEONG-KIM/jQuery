@@ -44,6 +44,17 @@
 		select * from reply where bonum = #num#
 	</select>
 	
+	<!-- 댓글 수정 -->
+	<update id="replyUpdate" parameterClass="replyVo">
+		update reply set  cont = #cont#, 
+			redate = sysdate where renum = #renum#
+	</update>
+
+	<!-- 댓글 삭제 -->	
+	<delete id="replyDelete" parameterClass="int">
+		delete from reply where renum = #renum#
+	</delete>
+	
 </sqlMap>
 
 

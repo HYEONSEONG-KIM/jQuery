@@ -65,6 +65,10 @@ input[value=등록]{
 	border-radius: 10px;
 }
 
+#modifyForm{
+	display : none;
+	
+}
 
 
 

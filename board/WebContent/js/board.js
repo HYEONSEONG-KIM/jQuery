@@ -1,6 +1,46 @@
 /**
  * 
  */
+// 댓글 수정
+replyDelete = function(){
+	
+	$.ajax({
+		url : '/board/ReplyDelete.do',
+		type : 'post',
+		data : {"vidx" : vidx},
+		success : function(data){
+			
+		},
+		error : function(xhr){
+			alert(xhr.status)
+		},
+		dataType : 'json'
+		
+	})
+	
+}
+
+
+replyUpdate = function(){
+	
+	$.ajax({
+		url : '/board/ReplyUpdata.do',
+		type : 'post',
+		data : reply,
+		success : function(data){
+			if(data.sw == "ok"){
+				alert("댓글 수정 성공")
+			}else{
+				alert("댓글 수정 실패")
+			}
+		},
+		error : function(xhr){
+			alert(xhr.status)
+		},
+		dataType : 'json'
+	})
+}
+
 replyListServer = function(btn){
 	
 	
@@ -21,10 +61,10 @@ replyListServer = function(btn){
 				
 				reply += '</p>';
 				reply += '<p class = "p2">';
-				reply += '<input idx = "' + v.renum +'" type = "button" name = "modify" value = "댓글수정" class = "action" idx = "' + v.num +'">'
-				reply += '<input idx = "' + v.renum +'" type = "button" name = "delete" value = "댓글삭제" class = "action" idx = "' + v.num +'">'
+				reply += '<input idx = "' + v.renum +'" type = "button" name = "r_modify" value = "댓글수정" class = "action" idx = "' + v.num +'">'
+				reply += '<input idx = "' + v.renum +'" type = "button" name = "r_delete" value = "댓글삭제" class = "action" idx = "' + v.num +'">'
 				reply += '</p>';
-				reply += '<p class = "p3">';
+				reply += '<p class = "cont p3">';
 				reply += v.cont
 				reply += '</p>';
 				reply += '</div>'
