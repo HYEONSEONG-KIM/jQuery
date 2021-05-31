@@ -88,14 +88,60 @@
 		})
 		
 		
-	/* 	// 이메일 체크
+		// 이메일 체크
 		$('#email').on('keyup',function(){
 			emailValue = $(this).val();
 			
-			regmail = /^[0-9a-zA-Z]+@[0-9a-zA-Z]+(\.[a-z]+){1,2})$/
-			//if(regmail.test(emailValue))
+			regmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+
+			
+			if(regmail.test(emailValue)){
+				okpro(this);
+			}else{
+				nopro(this,"올바른 형식이 아닙니다");
+			}
 		})
-		 */
+		 
+		// 날짜체크
+		$('#birth').on('change',function(){
+			// 선택한 날짜 변수에 담기
+			 birthValue = $(this).val();
+			
+			// 선택한 날짜 - 기준으로 나누기
+			 year = birthValue.split("-");
+			
+			// 선택한 날짜 년도를 정수형으로
+			 input = parseInt(year[0])
+			 
+			 // 현재 날짜
+			 var now = new Date();
+			 
+			// 현재 날짜에서 년도만 추출
+			 nowYear = now.getFullYear()
+			
+			 
+			 
+			 if(nowYear-14 < input){
+				 nopro(this,"14세 이하는 이용할 수 없습니다");
+			 }else{
+				 okpro(this);
+			 }
+			
+		})
+		
+		// 전화번호 체크
+			$('#hp').on('keyup',function(){
+			emailValue = $(this).val();
+			
+			regmail = /^\d{3}-\d{3,4}-\d{4}$/;
+
+			
+			if(regmail.test(emailValue)){
+				okpro(this);
+			}else{
+				nopro(this,"올바른 형식이 아닙니다");
+			}
+		})
 		
 		// 우편번호 체크
 		$('#search').on('click',function(){
@@ -150,6 +196,8 @@
 				return false;
 			}
 			
+			
+			
 			// 서버로 입력한 동을 data로 보내서 처리
 			$.ajax({
 				url : '/jquerypro/SearchCode.do',
@@ -175,8 +223,15 @@
 			
 			// 모달창 닫기
 			$('#myModal').modal('hide');
+			
 		})
 		
+		// 모달창 닫기 이벤
+		$('#myModal').on('hide.bs.modal',function(){
+			$('#dong').val("");
+			$('#result').empty();
+			
+		})
 		
 	})
 
@@ -237,7 +292,7 @@
         <input type="text" class="form-control" id="zip" placeholder="Enter Zip" name="mem_zip">
       </div>
       <button id = "search" class = "btn btn-default" type="button">Search Zip</button>
-      <button  data-toggle="modal" data-target="#myModal" class = "btn btn-default" type="button">modal Zip</button>
+      <button  id= "modalBtn" data-toggle="modal" data-target="#myModal" class = "btn btn-default" type="button">modal Zip</button>
     </div>
      <div class="form-group">
       <label class="control-label col-sm-2" for="Address1">Address1:</label>
